@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Topics</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        .topic {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00D4FF;
+            text-shadow: 2px 2px 5px rgba(0, 212, 255, 0.6);
+            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
+        }
+        .topic:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 212, 255, 0.5);
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 10px rgba(0, 212, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Quiz Topic</h1>
+        <div class="topic" onclick="startQuiz('html_quiz.html')">HTML Basics</div>
+        <div class="topic" onclick="startQuiz('css_quiz.html')">CSS Fundamentals</div>
+        <div class="topic" onclick="startQuiz('js_quiz.html')">JavaScript Essentials</div>
+    </div>
+    <script>
+        function startQuiz(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

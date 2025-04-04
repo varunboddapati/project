@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: linear-gradient(135deg, #f8ffae, #43c6ac);
+            color: black;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .question {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .options {
+            text-align: left;
+            margin: 15px 0;
+        }
+        .options label {
+            display: block;
+            padding: 15px;
+            font-size: 18px;
+            background: rgba(100, 100, 255, 0.2);
+            color: black;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 10px;
+            border: 2px solid transparent;
+        }
+        .options input {
+            display: none;
+        }
+        .options label:hover {
+            background: #ffcc00;
+            color: black;
+        }
+        .options input:checked + label {
+            background: #ff5733;
+            color: white;
+            border: 2px solid black;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff007f;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="quizTitle"></h1>
+    <div class="container">
+        <div id="quiz"></div>
+        <button onclick="submitQuiz()">Submit</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const topics = {
+            "HTML Basics": [
+                { question: "What does HTML stand for?", options: ["Hyperlink and Text Markup Language", "HyperText Markup Language", "High-Level Text Markup Language", "Home Tool Markup Language"], answer: 1 },
+                { question: "Which tag is used for a paragraph?", options: ["<p>", "<para>", "<text>", "<par>"], answer: 0 },
+                { question: "Which tag is used for inserting an image?", options: ["<img>", "<image>", "<pic>", "<src>"], answer: 0 },
+                { question: "What is the correct HTML tag for the largest heading?", options: ["<h6>", "<head>", "<h1>", "<header>"], answer: 2 },
+                { question: "Which attribute specifies an alternative text for an image?", options: ["alt", "title", "src", "text"], answer: 0 },
+                { question: "Which tag is used to create a hyperlink?", options: ["<link>", "<a>", "<href>", "<url>"], answer: 1 },
+                { question: "Which HTML element represents a table row?", options: ["<th>", "<tr>", "<td>", "<table>"], answer: 1 },
+                { question: "Which HTML element is used for a line break?", options: ["<br>", "<break>", "<lb>", "<newline>"], answer: 0 },
+                { question: "Which tag is used to define an ordered list?", options: ["<ul>", "<ol>", "<li>", "<orderlist>"], answer: 1 },
+                { question: "Which tag is used to define a table in HTML?", options: ["<tab>", "<table>", "<tr>", "<td>"], answer: 1 }
+            ]
+        };
+
+        const topic = "HTML Basics";
+        document.getElementById("quizTitle").innerText = topic;
+        const quizContainer = document.getElementById("quiz");
+
+        topics[topic].forEach((q, index) => {
+            const div = document.createElement("div");
+            div.classList.add("question");
+            div.innerHTML = `${index + 1}. ${q.question}`;
+
+            const optionsDiv = document.createElement("div");
+            optionsDiv.classList.add("options");
+            
+            q.options.forEach((option, i) => {
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = `question${index}`;
+                input.value = i;
+                input.id = `q${index}o${i}`;
+                
+                const label = document.createElement("label");
+                label.htmlFor = `q${index}o${i}`;
+                label.innerText = option;
+                
+                optionsDiv.appendChild(input);
+                optionsDiv.appendChild(label);
+            });
+            
+            div.appendChild(optionsDiv);
+            quizContainer.appendChild(div);
+        });
+
+        function submitQuiz() {
+            let score = 0;
+            topics[topic].forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption && parseInt(selectedOption.value) === q.answer) {
+                    score++;
+                }
+            });
+            document.getElementById("result").innerText = `Your Score: ${score} / ${topics[topic].length}`;
+        }
+    </script>
+</body>
+</html>
